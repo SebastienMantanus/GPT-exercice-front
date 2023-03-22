@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function App() {
