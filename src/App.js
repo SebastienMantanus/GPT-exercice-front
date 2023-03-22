@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function App() {
@@ -29,12 +29,17 @@ function App() {
     responseData(question);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
   return (
     <div className="chatBox">
       <div>
         <h1>Bienvenue sur mon GPT</h1>
         {!response && (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
             <textarea
               className="textarea"
               name="message"
@@ -57,7 +62,7 @@ function App() {
 
         {response && (
           <div className="response">
-            <h2>Voici votre réponse...</h2>
+            <h2>Voici votre réponse à la question : {question}</h2>
             <p>{response}</p>
             <CopyToClipboard
               text={response}
